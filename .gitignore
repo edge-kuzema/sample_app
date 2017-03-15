@@ -15,3 +15,5 @@
 .idea
 # Ignore Byebug command history file.
 .byebug_history
+# Ignore Spring files.
+/spring/*.pid
