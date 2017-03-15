@@ -11,8 +11,8 @@
 /log/*
 /tmp/*
 !/log/.keep
-!/tmp/.keep
-.idea/workspace.xml
+!/tmp.keep
+.idea
 
 # Ignore Byebug command history file.
 .byebug_history
