@@ -42,9 +42,22 @@ class UsersLoginTest < ActionDispatch::IntegrationTest
     delete logout_path
     assert_not is_logged_in?
     assert_redirected_to root_url
+    #Имитировать пользователя, нажавшего кнопку выхода в другом окне
+    delete logout_path
     follow_redirect!
     assert_select "a[href=?]", login_path
     assert_select "a[href=?]", logout_path,      count: 0
     assert_select "a[href=?]", user_path(@user), count: 0
   end
+
+  test "login with remembering" do
+    log_in_as(@user, remember_me: '1') #входим, нажимая запомнить меня
+    assert_not_empty cookies['remember_token'] #проверяем, что куки не пустые
   end
+
+  test "login without remembering" do
+    log_in_as(@user, remember_me: '1') #входим, чтобы установить куки
+    log_in_as(@user, remember_me: '0') #входим повторно, и убеждаемся, что предыдущие куки удалены
+    assert_empty cookies['remember_token']
+  end
+end
