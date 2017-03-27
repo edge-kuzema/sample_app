@@ -9,7 +9,7 @@ class SessionsController < ApplicationController
       #remember user #вызов хелпера, который запоминает пользователя при входе
       params[:session][:remember_me] == '1' ? remember(user) : forget(user) #если флажок запомнить меня выставлен, то запоминаем юзера
       #заменяет if-else
-      redirect_to user
+      redirect_back_or user
     else
       flash.now[:danger] = 'Invalid email/password combination'
       render 'new'

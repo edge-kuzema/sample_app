@@ -6,11 +6,11 @@ gem 'rails',                   '5.0.1'
 gem 'bcrypt',                  '3.1.11'
 gem 'bootstrap-sass',          '3.3.6'
 gem 'bcrypt',                  '3.1.11'
-gem 'faker',                   '1.6.6'
+gem 'faker',                   '1.6.6' #создает фейковые аккаунты
 gem 'carrierwave',             '0.11.2'
 gem 'mini_magick',             '4.5.1'
 gem 'fog',                     '1.38.0'
-gem 'will_paginate',           '3.1.0'
+gem 'will_paginate',           '3.1.0' #гем для разбивки множества пользователей по страницам
 gem 'bootstrap-will_paginate', '0.0.10'
 gem 'bootstrap-sass',          '3.3.6'
 gem 'puma',                    '3.4.0'
