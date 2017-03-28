@@ -24,7 +24,7 @@ class UsersEditTest < ActionDispatch::IntegrationTest
     log_in_as(@user) # затем входим в систему
     assert_redirected_to edit_user_url(@user) #пользователь перенаправляется на страницу редактирования
     #get edit_user_path(@user) #переходим на страницу редактирования юзера
-    assert_template 'users/edit' #проверяем, что отображается нужная страница редактирования
+    assert_template 'user/edit' #проверяем, что отображается нужная страница редактирования
     name = "Foo Bar"
     email = "foo@bar.com"
     patch user_path(@user), params: { user: { name: name, #отправляем верные данные для редактирования
