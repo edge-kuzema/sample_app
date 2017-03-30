@@ -18,6 +18,13 @@ User.create!(name:  "Example User",
                activated: true,
                activated_at: Time.zone.now)
 end
+
+#добавление микропостов к фейковым пользователям
+users = User.order(:created_at).take(6)
+50.times do
+  content = Faker::Lorem.sentence(5)
+  users.each { |user| user.microposts.create!(content: content) }
+end
 # Time.zone.now возвращает текущую временную метку с учетом времени на сервере
 #Сначала надо сбросить бд, а затем вызвать файл сид
 # rails db:migrate:reset

@@ -10,7 +10,9 @@ before_action :admin_user, only: :destroy
 
   def show
     @user = User.find(params[:id])
+    @microposts = @user.microposts.paginate(page: params[:page]) #добавление переменной микропост для дейтсвия отображения
   end
+
 
   def new
   @user = User.new
@@ -58,13 +60,14 @@ end
   end
 end
 
-def logged_in_user #подтверждает вошедшего в систему пользователя
-  unless logged_in? #Если только залогинились, тогда доступны действия редактирования
-    store_location #вызывает помощник из sessions_helper
-    flash[:danger] = "Please log in."
-    redirect_to login_url
-  end
-end
+#перенесен в аппликейшн котроллер, потому что метод вызывается в обоих контроллерах
+#def logged_in_user #подтверждает вошедшего в систему пользователя
+  #unless logged_in? #Если только залогинились, тогда доступны действия редактирования
+  #  store_location #вызывает помощник из sessions_helper
+   # flash[:danger] = "Please log in."
+    #redirect_to login_url
+ # end
+#end
 
 def correct_user
   @user = User.find(params[:id])
