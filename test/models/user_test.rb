@@ -67,5 +67,35 @@ end
       @user.destroy
     end
   end
-end
 
+  #проверка подписки и отписки от пользователя
+  test "should follow and unfollow a user" do
+    michael = users(:michael)
+    archer  = users(:archer)
+    assert_not michael.following?(archer)
+    michael.follow(archer)
+    assert michael.following?(archer)
+    assert archer.followers.include?(michael)
+    michael.unfollow(archer)
+    assert_not michael.following?(archer)
+  end
+
+#Фид сообщений должен иметь правильные посты
+  test "feed should have the right posts" do
+    michael = users(:michael)
+    archer  = users(:archer)
+    lana    = users(:lana)
+    # Посты людей на которых подписан юзер
+    lana.microposts.each do |post_following|
+      assert michael.feed.include?(post_following)
+    end
+    # Должны отображаться свои посты
+    michael.microposts.each do |post_self|
+      assert michael.feed.include?(post_self)
+    end
+    # Посты неподписанных пользователей не должны
+    archer.microposts.each do |post_unfollowed|
+      assert_not michael.feed.include?(post_unfollowed)
+    end
+  end
+end

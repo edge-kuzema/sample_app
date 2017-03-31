@@ -29,3 +29,11 @@ end
 #Сначала надо сбросить бд, а затем вызвать файл сид
 # rails db:migrate:reset
 # rails db:seed
+
+# Создание фейковых подписок пользователей друг на друга
+users = User.all
+user  = users.first
+following = users[2..50]
+followers = users[3..40]
+following.each { |followed| user.follow(followed) }
+followers.each { |follower| follower.follow(user) }
